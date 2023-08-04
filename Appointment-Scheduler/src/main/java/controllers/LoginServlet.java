@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDao;
 import dao.UserDaoImpl;
 import models.User;
+import services.RegistrationServiceImpl;
+import services.RegistrationServices;
 
 
 @WebServlet("/login")
@@ -33,8 +36,9 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
-        UserDaoImpl uDao = new UserDaoImpl();
-        User user = uDao.getUserByEmailAndPassword(email, password);
+        UserDao userDao = new UserDaoImpl();
+        RegistrationServices userService = new RegistrationServiceImpl(userDao);
+        User user = userService.getUserByEmailAndPassword(email, password);
         
         if(user != null)
         {

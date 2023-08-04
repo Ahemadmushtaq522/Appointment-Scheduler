@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDao;
 import dao.UserDaoImpl;
 import models.User;
+import services.RegistrationServiceImpl;
 import services.RegistrationServices;
 
 import java.io.IOException;
@@ -35,10 +37,11 @@ public class RegistrationServlet extends HttpServlet {
         String password2 = request.getParameter("password2");
         String mobile = request.getParameter("mobile");
 
+        UserDao userDao = new UserDaoImpl();
+        RegistrationServices userService = new RegistrationServiceImpl(userDao);
         User user = new User(username, email,password,mobile);
         
-        UserDaoImpl userDao = new UserDaoImpl();
-        String result = userDao.registerUser(user);
+        String result = userService.registerUser(user);
         
         
 

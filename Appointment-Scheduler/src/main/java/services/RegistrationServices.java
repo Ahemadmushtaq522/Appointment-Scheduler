@@ -3,6 +3,6 @@ package services;
 import models.User;
 
 public interface RegistrationServices {
-	void registerUser(User user);
-
+    String registerUser(User user);
+    User getUserByEmailAndPassword(String email, String password);
 }
