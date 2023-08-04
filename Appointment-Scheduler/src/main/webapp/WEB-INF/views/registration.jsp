@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Sign Up Page</title>
+<title>Register</title>
 <link rel="stylesheet" href="css/style-01.css">
 </head>
 <body>

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDaoImpl;
 import models.User;
 import services.RegistrationServices;
 
@@ -34,16 +35,12 @@ public class RegistrationServlet extends HttpServlet {
         String password2 = request.getParameter("password2");
         String mobile = request.getParameter("mobile");
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setMobile(mobile);
+        User user = new User(username, email,password,mobile);
+        
+        UserDaoImpl userDao = new UserDaoImpl();
+        String result = userDao.registerUser(user);
         
         
-        System.out.println(username);
-
-//        userService.registerUser(user);
 
         response.sendRedirect(request.getContextPath() + "/login");
     }

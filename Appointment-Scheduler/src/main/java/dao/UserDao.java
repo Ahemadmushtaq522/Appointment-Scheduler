@@ -3,6 +3,6 @@ package dao;
 import models.User;
 
 public interface UserDao {
-	void registerUser(User user);
-
+	String registerUser(User user);
+	User getUserByEmailAndPassword(String email, String password);
 }

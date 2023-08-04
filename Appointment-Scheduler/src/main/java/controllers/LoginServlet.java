@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.UserDaoImpl;
 import models.User;
 
 
@@ -28,16 +30,25 @@ public class LoginServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
         String email = request.getParameter("email");
+        String password = request.getParameter("password");
         
-        User user = new User();
-//        user.getUsername();
-//        user.getPassword();
+        UserDaoImpl uDao = new UserDaoImpl();
+        User user = uDao.getUserByEmailAndPassword(email, password);
         
+        if(user != null)
+        {
+        	HttpSession session = request.getSession();
+        	session.setAttribute("user", user);
+        	response.sendRedirect(request.getContextPath() + "/home");
+        }
+        else {
+        	request.setAttribute("error", "Invalid username or password");
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+        }
 
 
-        response.sendRedirect(request.getContextPath() + "/home");
+        
     }
     
 }
