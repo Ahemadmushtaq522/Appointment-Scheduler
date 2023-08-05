@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/consultant")
+public class ConsultantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-    public HomeServlet() {
+    public ConsultantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/consultant/consultantHome.jsp").forward(request, response);
 	}
 
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

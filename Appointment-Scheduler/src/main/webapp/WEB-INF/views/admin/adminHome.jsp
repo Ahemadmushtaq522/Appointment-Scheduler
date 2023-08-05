@@ -32,9 +32,9 @@
       <li>
        <a href="#">
          <i class='bx bx-briefcase' ></i>
-         <span class="links_name">Services</span>
+         <span class="links_name">Clients</span>
        </a>
-       <span class="tooltip">Services</span>
+       <span class="tooltip">Clients</span>
      </li>
      
      <li>
@@ -53,10 +53,10 @@
      </li>
       <li>
        <a href="#">
-         <i class='bx bx-user' ></i>
-         <span class="links_name">Profile</span>
+         <i class='bx bxs-report'></i>
+         <span class="links_name">Reports</span>
        </a>
-       <span class="tooltip">Profile</span>
+       <span class="tooltip">Reports</span>
      </li>
      
      <li class="profile">

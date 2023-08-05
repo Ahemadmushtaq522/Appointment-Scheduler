@@ -29,20 +29,14 @@
         </a>
          <span class="tooltip">Dashboard</span>
       </li>
-      <li>
-       <a href="#">
-         <i class='bx bx-briefcase' ></i>
-         <span class="links_name">Services</span>
-       </a>
-       <span class="tooltip">Services</span>
-     </li>
+    
      
      <li>
        <a href="#">
 		<i class='bx bx-bulb' ></i>
-         <span class="links_name">Consultants</span>
+         <span class="links_name">Clients</span>
        </a>
-       <span class="tooltip">Consultants</span>
+       <span class="tooltip">Clients</span>
      </li>
      <li>
        <a href="#">

@@ -12,7 +12,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #11101D;
+  background: #1d1b31;;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -193,7 +193,7 @@
   height: 45px;
   width: 45px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 15px;
   margin-right: 10px;
 }
 .sidebar li.profile .name,
@@ -242,6 +242,40 @@
   font-size: 25px;
   font-weight: 500;
   margin: 18px
+}
+.column-1 {
+  float: left;
+  width: 30%;
+  padding: 15px;
+}
+.column-2 {
+  float: left;
+  width: 70%;
+  padding: 15px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.cards-container{
+	padding: 2px 16px;
+	background-color: #E4E9F7;
+/*	 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
+}
+.right-column{
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  min-height: 80vh;
 }
 @media (max-width: 420px) {
   .sidebar li .tooltip{

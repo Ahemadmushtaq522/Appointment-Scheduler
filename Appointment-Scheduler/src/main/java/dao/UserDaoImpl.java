@@ -65,6 +65,7 @@ public class UserDaoImpl implements UserDao {
 	        }
 	        
 	        ps.close();
+	        con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +101,7 @@ public class UserDaoImpl implements UserDao {
             }
             
             ps.close();
-//            con.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
