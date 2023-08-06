@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%
+    boolean visitedWelcomePage = (boolean) session.getAttribute("visitedWelcomePage");
+    if (visitedWelcomePage==false) {
+        response.sendRedirect(request.getContextPath() + "/");
+        
+    }
+
+    session.setAttribute("visitedWelcomePage", false);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +19,9 @@
 <body>
 <div id="login-box">
   <div class="left">
-    <h1>Log In</h1>
+  
+    <h1 style="color: rgb(0, 128, 192);"><% String userType = request.getParameter("userType"); session.setAttribute("userType", userType);  %>
+        <%= userType %></h1>
     
     <form action="<%= request.getContextPath() %>/login" method="POST">
     <br><br><br>
@@ -31,7 +42,10 @@
 		
 	</div>
   </div>
-  
 </div>
+
+
+ 
+ 
 </body>
 </html>

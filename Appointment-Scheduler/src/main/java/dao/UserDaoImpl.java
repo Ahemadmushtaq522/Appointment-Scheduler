@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.Admin;
+import models.Consultant;
 import models.User;
 
 public class UserDaoImpl implements UserDao {
@@ -74,6 +76,77 @@ public class UserDaoImpl implements UserDao {
 	return result;
 		
 	}
+	@Override
+	public String registerAdmin(Admin admin) {
+		loadDriver(dbDriver);
+		
+		Connection con = getConnection();
+		if(con!=null) {
+			System.out.println("not null ");
+		}
+		String result = "Data entered successfully";
+		String sql = "insert into administrator(aname, aemail, apwd, amobile) values(?,?,?,?)";
+		
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, admin.getUsername());
+			ps.setString(2, admin.getPassword());
+			ps.setString(3, admin.getEmail());
+			ps.setString(4, admin.getMobile());
+			
+			int rowsAffected = ps.executeUpdate(); 
+	        
+	        if (rowsAffected <= 0) {
+	            result = "Error inserting data into the table administrator";
+	        }
+	        
+	        ps.close();
+	        con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result="error inserting data to table administrator";
+		}
+	return result;
+	}
+
+	@Override
+	public String registerConsultant(Consultant consultant) {
+		loadDriver(dbDriver);
+		
+		Connection con = getConnection();
+		if(con!=null) {
+			System.out.println("not null ");
+		}
+		String result = "Data entered successfully";
+		String sql = "insert into consultants(cname, cemail, cpwd, cmobile) values(?,?,?,?)";
+		
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, consultant.getUsername());
+			ps.setString(2, consultant.getPassword());
+			ps.setString(3, consultant.getEmail());
+			ps.setString(4, consultant.getMobile());
+			
+			int rowsAffected = ps.executeUpdate(); 
+	        
+	        if (rowsAffected <= 0) {
+	            result = "Error inserting data into the table consultants";
+	        }
+	        
+	        ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result="error inserting data to table consultants";
+		}
+		finally {
+			
+		}
+	return result;
+	}
 
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) {
@@ -93,7 +166,7 @@ public class UserDaoImpl implements UserDao {
 
             if (rs.next()) {
                 int id = rs.getInt("id");
-                String username = rs.getString("uemail");
+                String username = rs.getString("uname");
                 String mobile = rs.getString("umobile");
 
                 User user = new User(username, email, password, mobile);
@@ -113,6 +186,82 @@ public class UserDaoImpl implements UserDao {
 		
 		return null;
 	}
+
+	@Override
+	public Consultant getConsultantByEmailAndPassword(String email, String password) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM consultants WHERE cemail = ? AND cpwd = ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("cname");
+                String mobile = rs.getString("cmobile");
+
+                Consultant consultant = new Consultant(username, email, password, mobile);
+                return consultant;
+            }
+            
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+		
+		
+		return null;
+	}
+
+	@Override
+	public Admin getAdminByEmailAndPassword(String email, String password) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM administrator WHERE aemail = ? AND apwd = ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("aname");
+                String mobile = rs.getString("amobile");
+
+                Admin admin = new Admin(username, email, password, mobile);
+                return admin;
+            }
+            
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+		
+		
+		return null;
+	}
+	
+
 
 	
 }

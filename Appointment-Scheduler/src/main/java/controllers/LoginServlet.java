@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import dao.UserDaoImpl;
+import models.Admin;
+import models.Consultant;
 import models.User;
 import services.RegistrationServiceImpl;
 import services.RegistrationServices;
@@ -35,21 +37,52 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        HttpSession session = request.getSession();
+        String userType = (String) session.getAttribute("userType");
         
         UserDao userDao = new UserDaoImpl();
-        RegistrationServices userService = new RegistrationServiceImpl(userDao);
-        User user = userService.getUserByEmailAndPassword(email, password);
+        RegistrationServices service = new RegistrationServiceImpl(userDao);
+       
         
-        if(user != null)
-        {
-        	HttpSession session = request.getSession();
-        	session.setAttribute("username", user.getUsername());
-        	response.sendRedirect(request.getContextPath() + "/home");
+        if("Job Hunter".equals(userType)) {
+        	User user = service.getUserByEmailAndPassword(email, password);
+        	if(user != null) {
+        		session.setAttribute("username", user.getUsername());
+            	session.setAttribute("loggedIn", true);
+        		response.sendRedirect(request.getContextPath() + "/jobseeker");
+        	}
+
+            else {
+            	request.setAttribute("error", "Invalid username or password");
+                request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            }
+        }else if("Consultant".equals(userType)) {
+        	Consultant consultant = service.getConsultantByEmailAndPassword(email, password);
+        	if(consultant != null) {
+        		session.setAttribute("username", consultant.getUsername());
+            	session.setAttribute("loggedIn", true);
+        		response.sendRedirect(request.getContextPath() + "/consultant");
+        	}
+
+            else {
+            	request.setAttribute("error", "Invalid username or password");
+                request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            }
+        }else if("Administrator".equals(userType)) {
+        	Admin admin = service.getAdminByEmailAndPassword(email, password);
+        	if(admin != null) {
+        		session.setAttribute("username", admin.getUsername());
+            	session.setAttribute("loggedIn", true);
+        		response.sendRedirect(request.getContextPath() + "/admin");
+        	}
+
+            else {
+            	request.setAttribute("error", "Invalid username or password");
+                request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            }
         }
-        else {
-        	request.setAttribute("error", "Invalid username or password");
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-        }
+        
+       
 
 
         

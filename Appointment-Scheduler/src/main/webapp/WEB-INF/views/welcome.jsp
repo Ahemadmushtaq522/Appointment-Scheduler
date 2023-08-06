@@ -53,10 +53,10 @@ body {
   <div class="left">
     <h1 style="color:#6f6cde;">Get Started...</h1><br>
     
-    <div class="button"><span class="text">Job Hunter</span></div>
-<div class="button"><span>Consultant</span></div>
-<div class="button"><span>Administrator</span></div>
-</form>
+    <div class="button" onclick="redirectToLogin('Job Hunter')"><span class="text">Job Hunter</span></div>
+<div class="button" onclick="redirectToLogin('Consultant')"><span>Consultant</span></div>
+<div class="button" onclick="redirectToLogin('Administrator')"><span>Administrator</span></div>
+
 
     
   </div>
@@ -69,7 +69,15 @@ body {
 		
 	</div>
   </div>
-  
+  <script>
+  function redirectToLogin(userType) {
+	  <% 
+	  session.setAttribute("visitedWelcomePage", true); %>
+	   var contextPath = '<%= request.getContextPath() %>';
+	   
+	    window.location.href = contextPath + '/login?userType=' + encodeURIComponent(userType);
+  }
+</script>
 </div>
 </body>
 </html>
