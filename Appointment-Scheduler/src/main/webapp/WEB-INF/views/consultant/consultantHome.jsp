@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>The Job</title>
-    <link rel="stylesheet" href="css/style-02.css?version=1">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-02.css?version=1">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,31 +23,30 @@
          <span class="tooltip">Search</span>
       </li> -->
       <li>
-        <a href="#">
+        <a href="<%= request.getContextPath() %>/consultant">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Dashboard</span>
         </a>
          <span class="tooltip">Dashboard</span>
       </li>
-    
-     
-     <li>
-       <a href="#">
-		<i class='bx bx-bulb' ></i>
+      <li>
+       <a href="<%= request.getContextPath() %>/consultant/clients">
+         <i class='bx bx-briefcase' ></i>
          <span class="links_name">Clients</span>
        </a>
        <span class="tooltip">Clients</span>
      </li>
+     
      <li>
-       <a href="#">
+       <a href="<%= request.getContextPath() %>/consultant/appointments">
          <i class='bx bx-calendar'></i>
          <span class="links_name">Appointments</span>
        </a>
        <span class="tooltip">Appointments</span>
      </li>
-      <li>
-       <a href="#">
-         <i class='bx bx-user' ></i>
+     <li>
+       <a href="<%= request.getContextPath() %>/consultant/profile">
+         <i class='bx bxs-report'></i>
          <span class="links_name">Profile</span>
        </a>
        <span class="tooltip">Profile</span>
@@ -61,7 +60,7 @@
              <div class="job">Web designer</div>
            </div>
          </div>
-         <i class='bx bx-log-out' id="log_out" ></i>
+         <a href="<%= request.getContextPath() %>/login"><i class='bx bx-log-out' id="log_out" ></i></a>
      </li>
     </ul>
   </div>
@@ -88,6 +87,8 @@
 			  </div>
 			</div>
     	</div>
+    	
+    	
 			
 	 </div>
 

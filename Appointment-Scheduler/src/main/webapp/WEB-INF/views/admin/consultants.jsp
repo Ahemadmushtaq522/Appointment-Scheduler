@@ -4,10 +4,12 @@
   <head>
     <meta charset="UTF-8">
     <title>The Job</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-02.css?version=1">
     <!-- Boxicons CDN Link -->
+    
+    <link href="${pageContext.request.contextPath}/css/style-02.css?version=1" rel="stylesheet" >
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    </head>
 <body>
   <div class="sidebar">
@@ -23,14 +25,14 @@
          <span class="tooltip">Search</span>
       </li> -->
       <li>
-        <a href="<%= request.getContextPath() %>/consultant">
+        <a href="<%= request.getContextPath() %>/admin">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Dashboard</span>
         </a>
          <span class="tooltip">Dashboard</span>
       </li>
       <li>
-       <a href="<%= request.getContextPath() %>/consultant/clients">
+       <a href="<%= request.getContextPath() %>/admin/clients">
          <i class='bx bx-briefcase' ></i>
          <span class="links_name">Clients</span>
        </a>
@@ -38,18 +40,25 @@
      </li>
      
      <li>
-       <a href="<%= request.getContextPath() %>/consultant/appointments">
+       <a href="<%= request.getContextPath() %>/admin/consultants">
+		<i class='bx bx-bulb' ></i>
+         <span class="links_name">Consultants</span>
+       </a>
+       <span class="tooltip">Consultants</span>
+     </li>
+     <li>
+       <a href="<%= request.getContextPath() %>/admin/appointments">
          <i class='bx bx-calendar'></i>
          <span class="links_name">Appointments</span>
        </a>
        <span class="tooltip">Appointments</span>
      </li>
-     <li>
-       <a href="<%= request.getContextPath() %>/consultant/profile">
+      <li>
+       <a href="<%= request.getContextPath() %>/admin/reports">
          <i class='bx bxs-report'></i>
-         <span class="links_name">Profile</span>
+         <span class="links_name">Reports</span>
        </a>
-       <span class="tooltip">Profile</span>
+       <span class="tooltip">Reports</span>
      </li>
      
      <li class="profile">
@@ -67,7 +76,7 @@
   <section class="home-section">
       
       <!--  Left side of the dashboard -->
-      	<h2><div class="text">Appointments</div></h2>
+      	<h2><div class="text">Consultants</div></h2>
       <div class="column-1">
     
     	

@@ -23,14 +23,14 @@
          <span class="tooltip">Search</span>
       </li> -->
       <li>
-        <a href="#">
+        <a href="<%= request.getContextPath() %>/admin">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Dashboard</span>
         </a>
          <span class="tooltip">Dashboard</span>
       </li>
       <li>
-       <a href="#">
+       <a href="<%= request.getContextPath() %>/admin/clients">
          <i class='bx bx-briefcase' ></i>
          <span class="links_name">Clients</span>
        </a>
@@ -38,21 +38,21 @@
      </li>
      
      <li>
-       <a href="#">
+       <a href="<%= request.getContextPath() %>/admin/consultants">
 		<i class='bx bx-bulb' ></i>
          <span class="links_name">Consultants</span>
        </a>
        <span class="tooltip">Consultants</span>
      </li>
      <li>
-       <a href="#">
+       <a href="<%= request.getContextPath() %>/admin/appointments">
          <i class='bx bx-calendar'></i>
          <span class="links_name">Appointments</span>
        </a>
        <span class="tooltip">Appointments</span>
      </li>
       <li>
-       <a href="#">
+       <a href="<%= request.getContextPath() %>/admin/reports">
          <i class='bx bxs-report'></i>
          <span class="links_name">Reports</span>
        </a>
@@ -67,7 +67,7 @@
              <div class="job">Web designer</div>
            </div>
          </div>
-         <i class='bx bx-log-out' id="log_out" ></i>
+         <a href="<%= request.getContextPath() %>/login"><i class='bx bx-log-out' id="log_out" ></i></a>
      </li>
     </ul>
   </div>
@@ -94,6 +94,8 @@
 			  </div>
 			</div>
     	</div>
+    	
+    	
 			
 	 </div>
 
