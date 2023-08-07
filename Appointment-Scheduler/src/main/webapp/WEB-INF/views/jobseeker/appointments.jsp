@@ -54,7 +54,7 @@
      
      <li class="profile">
          <div class="profile-details">
-           <img src="images/profile.png" alt="profileImg">
+           <img src="${pageContext.request.contextPath}/images/profile.png" alt="profileImg">
            <div class="name_job">
              <div class="name"><%= session.getAttribute("username") %></div>
              <div class="job">Web designer</div>
@@ -66,40 +66,13 @@
   </div>
   <section class="home-section">
       
-      <!--  Left side of the dashboard -->
+      <!--  job seeker's appointments displayed here -->
       	<h2><div class="text">Appointments</div></h2>
-      <div class="column-1">
-    
-    	
-    	<!-- consultant cards -->
-    	<div class="cards-container">
-    		<div class="card">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>
-			<br>
-			<div class="card">
-			  <div class="container">
-			    <h4><b>Jakson Peter</b></h4> 
-			    <p>Computer Engineering</p> 
-			  </div>
-			</div>
-    	</div>
-    	
-    	
-			
-	 </div>
-
-	<!-- Right side of the dashboard -->
-  <div class="column-2">
+     <div class="column-3">
 			<div class="right-column">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>  </div>
+			  
+			</div>
+		</div> 
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

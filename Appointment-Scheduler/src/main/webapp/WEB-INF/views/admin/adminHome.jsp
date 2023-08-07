@@ -14,6 +14,7 @@
     <div class="logo-details">
       <i class='bx bx-briefcase icon'></i>
         <div class="logo_name">The Job</div>
+        
         <i class='bx bx-menu' id="btn" ></i>
     </div>
     <ul class="nav-list">

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import models.Admin;
 import models.Consultant;
 import models.User;
@@ -11,5 +13,6 @@ public interface UserDao {
 	User getUserByEmailAndPassword(String email, String password);
 	Consultant getConsultantByEmailAndPassword(String email, String password);
 	Admin getAdminByEmailAndPassword(String email, String password);
-	
+	List<User> getAllJobSeekers();
+	List<Consultant> getAllConsultants();
 }

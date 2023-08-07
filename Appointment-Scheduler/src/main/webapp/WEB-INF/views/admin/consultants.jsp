@@ -1,5 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
@@ -63,7 +63,7 @@
      
      <li class="profile">
          <div class="profile-details">
-           <img src="images/profile.png" alt="profileImg">
+           <img src="${pageContext.request.contextPath}/images/profile.png" alt="profileImg">
            <div class="name_job">
              <div class="name"><%= session.getAttribute("username") %></div>
              <div class="job">Web designer</div>
@@ -75,38 +75,33 @@
   </div>
   <section class="home-section">
       
-      <!--  Left side of the dashboard -->
       	<h2><div class="text">Consultants</div></h2>
-      <div class="column-1">
-    
-    	
-    	<!-- consultant cards -->
-    	<div class="cards-container">
-    		<div class="card">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>
-			<br>
-			<div class="card">
-			  <div class="container">
-			    <h4><b>Jakson Peter</b></h4> 
-			    <p>Computer Engineering</p> 
-			  </div>
-			</div>
-    	</div>
-    	
-    	
-			
-	 </div>
-
-	<!-- Right side of the dashboard -->
-  <div class="column-2">
+      
+	<!-- Consultant Details -->
+  <div class="column-3">
 			<div class="right-column">
 			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
+			    <div class="table-container">
+  <!-- <h2 class="header">Job Seekers' Details</h2>  -->
+  <br>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Consultant Id</div>
+      <div class="col col-2">Email</div>
+      <div class="col col-3">Mobile</div>
+      <div class="col col-4">Delete</div>
+    </li>
+    
+    <c:forEach items="${consultants}" var="consultant">
+       <li class="table-row">
+            <div class="col col-1" data-label="Username">${consultant.username}</div>
+            <div class="col col-2" data-label="Email">${consultant.email}</div>
+            <div class="col col-3" data-label="Mobile">${consultant.mobile}</div>
+            <div class="col col-4" data-label="Mobile"><button>Delete</button></div>
+       </li>
+     </c:forEach>
+  </ul>
+</div> 
 			  </div>
 			</div>  </div>
   </section>

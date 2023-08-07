@@ -54,7 +54,7 @@
      
      <li class="profile">
          <div class="profile-details">
-           <img src="images/profile.png" alt="profileImg">
+           <img src="${pageContext.request.contextPath}/images/profile.png" alt="profileImg">
            <div class="name_job">
              <div class="name"><%= session.getAttribute("username") %></div>
              <div class="job">Web designer</div>

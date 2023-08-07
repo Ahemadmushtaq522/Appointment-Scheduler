@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import controllers.AdminServlet;
 import dao.UserDao;
 import models.Admin;
@@ -42,5 +44,15 @@ public class RegistrationServiceImpl implements RegistrationServices {
 	@Override
 	public Admin getAdminByEmailAndPassword(String email, String password) {
 		return userDao.getAdminByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public List<User> getAllJobSeekers() {
+		return userDao.getAllJobSeekers();
+	}
+
+	@Override
+	public List<Consultant> getAllConsultants() {
+		return userDao.getAllConsultants();
 	}
 }

@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import models.Admin;
 import models.Consultant;
@@ -260,7 +262,77 @@ public class UserDaoImpl implements UserDao {
 		
 		return null;
 	}
-	
+
+	@Override
+	public List<User> getAllJobSeekers() {
+		 System.out.println("in get all job seekers method");
+	    loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    List<User> jobSeekers = new ArrayList<>();
+
+	    String sql = "SELECT * FROM users";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            String username = rs.getString("uname");
+	            String email = rs.getString("uemail");
+	            String password = rs.getString("upwd");
+	            String mobile = rs.getString("umobile");
+
+	            User user = new User(username, password, email, mobile);
+	            System.out.println("user "+user);
+	            jobSeekers.add(user);
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return jobSeekers;
+	}
+
+	@Override
+	public List<Consultant> getAllConsultants() {
+		System.out.println("in get all Consultants method");
+	    loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    List<Consultant> consultants = new ArrayList<>();
+
+	    String sql = "SELECT * FROM consultants";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            String username = rs.getString("cname");
+	            String email = rs.getString("cemail");
+	            String password = rs.getString("cpwd");
+	            String mobile = rs.getString("cmobile");
+
+	            Consultant consultant = new Consultant(username, password, email, mobile);
+	            System.out.println("consultant "+consultant);
+	            consultants.add(consultant);
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return consultants;
+	}
+
 
 
 	
