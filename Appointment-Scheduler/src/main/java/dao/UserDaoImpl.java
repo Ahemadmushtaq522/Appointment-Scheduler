@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Admin;
+import models.Appointments;
 import models.Consultant;
 import models.User;
 
@@ -333,6 +334,170 @@ public class UserDaoImpl implements UserDao {
 	    return consultants;
 	}
 
+	@Override
+	public String getUserMobileByUsername(String username) {
+		loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    String mobile = null;
+	    System.out.println(username);
+	    String sql = "SELECT umobile FROM users WHERE uname = ?";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        ps.setString(1, username);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            mobile = rs.getString("umobile");
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    System.out.println(mobile);
+	    return mobile;
+	}
+
+	@Override
+	public String makeAppointment(Appointments appointment) {
+		loadDriver(dbDriver);
+		Connection con = getConnection();
+		String result = "Appointment made successfully";
+		String sql = "insert into appointments(uname, umobile, cname, cmobile, adate, atime) values(?,?,?,?,?,?)";
+		System.out.println("appointment "+appointment.getUsername());
+        System.out.println("appointment "+appointment.getUserMobile());
+        System.out.println("appointment "+appointment.getConsultantName());
+        System.out.println("appointment "+appointment.getConsultantMobile());
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, appointment.getUsername());
+			ps.setString(2, appointment.getUserMobile());
+			ps.setString(3, appointment.getConsultantName());
+			ps.setString(4, appointment.getConsultantMobile());
+			ps.setString(5, appointment.getAppointmentDate());
+			ps.setString(6, appointment.getAppointmentTime());
+			
+			int rowsAffected = ps.executeUpdate(); 
+	        
+	        if (rowsAffected <= 0) {
+	            result = "Appointment unsuccessfull!";
+	        }
+	        
+	        ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result="Appointment unsuccessfull!";
+		}
+		finally {
+			
+		}
+	return result;
+	}
+
+	@Override
+	public List<Appointments> getAllAppointments() {
+		 System.out.println("in get all appointments method");
+		    loadDriver(dbDriver);
+		    Connection con = getConnection();
+		    List<Appointments> appointments = new ArrayList<>();
+
+		    String sql = "SELECT * FROM appointments";
+		    PreparedStatement ps;
+		    ResultSet rs;
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            int id = rs.getInt("id");
+		            String username = rs.getString("uname");
+		            String usermobile = rs.getString("umobile");
+		            String consultantname = rs.getString("cname");
+		            String consultantmobile = rs.getString("cmobile");
+		            String adate = rs.getString("adate");
+		            String atime = rs.getString("atime");
+
+		            Appointments appointment = new Appointments(username, usermobile, consultantname, consultantmobile,adate,atime);
+		            System.out.println("appointment "+appointment.getUsername());
+		            System.out.println("appointment "+appointment.getUserMobile());
+		            System.out.println("appointment "+appointment.getConsultantName());
+		            System.out.println("appointment "+appointment.getConsultantMobile());
+		            
+		            appointments.add(appointment);
+		        }
+
+		        ps.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return appointments;
+	}
+
+	@Override
+	public String deleteByConsultantEmail(String email) {
+	    loadDriver(dbDriver);
+	    Connection con = getConnection();
+
+	    String sql = "DELETE FROM consultants WHERE cemail = ?";
+	    PreparedStatement ps;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        ps.setString(1, email);
+	        int rowsAffected = ps.executeUpdate();
+
+	        if (rowsAffected > 0) {
+	            return "Deleted consultant associated with consultant email: " + email;
+	        } else {
+	            return "No consultant found with consultant email: " + email;
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return "Error deleting consultant associated with consultant email: " + email;
+	    }
+	}
+
+	@Override
+	public boolean isUserExistsByEmail(String email) {
+		loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    boolean userExists = false;
+
+	    String sql = "SELECT * FROM users WHERE uemail = ?";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        ps.setString(1, email);
+	        rs = ps.executeQuery();
+
+	        // If any result is returned, it means the user (consultant) exists
+	        userExists = rs.next();
+
+	        rs.close();
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return userExists;
+	}
 
 
 	

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -72,41 +73,39 @@
     </ul>
   </div>
   <section class="home-section">
-      
-      <!--  Left side of the dashboard -->
+         <!--  admin's appointments displayed here -->
       	<h2><div class="text">Appointments</div></h2>
-      <div class="column-1">
-    
-    	
-    	<!-- consultant cards -->
-    	<div class="cards-container">
-    		<div class="card">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>
-			<br>
-			<div class="card">
-			  <div class="container">
-			    <h4><b>Jakson Peter</b></h4> 
-			    <p>Computer Engineering</p> 
-			  </div>
-			</div>
-    	</div>
-    	
-    	
-			
-	 </div>
-
-	<!-- Right side of the dashboard -->
-  <div class="column-2">
+       <div class="column-3">
 			<div class="right-column">
 			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>  </div>
+			    <div class="table-container">
+  <!-- <h2 class="header">Job Seekers' Details</h2>  -->
+				  <br>
+				  <ul class="responsive-table">
+				    <li class="table-header">
+				      <div class="col col-1">Consultant</div>
+				      <div class="col col-2">Mobile</div>
+				      <div class="col col-3">Client</div>
+				      <div class="col col-4">Appointment Date</div>
+				      <div class="col col-5">Appointment Time</div>
+				      <div class="col col-6">Action</div>
+				    </li>
+				    
+				    <c:forEach items="${appointments}" var="appointment">
+				       <li class="table-row">
+				            <div class="col col-1" data-label="Username">${appointment.consultantName}</div>
+				            <div class="col col-2" data-label="Phone">${appointment.consultantMobile}</div>
+				            <div class="col col-3" data-label="uname">${appointment.username}</div>
+				            <div class="col col-4" data-label="date">${appointment.appointmentDate}</div>
+				            <div class="col col-5" data-label="time">${appointment.appointmentTime}</div>
+				            <div class="col col-6" data-label="cancel"><button class="delete-button">Cancel</button></div>
+				       </li>
+				     </c:forEach>
+				  </ul>
+				</div> 
+			 </div>
+		</div>  
+	</div>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

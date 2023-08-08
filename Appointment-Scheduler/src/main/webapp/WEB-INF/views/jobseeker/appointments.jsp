@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -68,11 +69,35 @@
       
       <!--  job seeker's appointments displayed here -->
       	<h2><div class="text">Appointments</div></h2>
-     <div class="column-3">
+       <div class="column-3">
 			<div class="right-column">
-			  
-			</div>
-		</div> 
+			  <div class="container">
+			    <div class="table-container">
+  <!-- <h2 class="header">Job Seekers' Details</h2>  -->
+				  <br>
+				  <ul class="responsive-table">
+				    <li class="table-header">
+				      <div class="col col-1">Consultant</div>
+				      <div class="col col-2">Mobile</div>
+				      <div class="col col-3">Appointment Date</div>
+				      <div class="col col-4">Appointment Time</div>
+				      <div class="col col-5">Action</div>
+				    </li>
+				    
+				    <c:forEach items="${appointments}" var="appointment">
+				       <li class="table-row">
+				            <div class="col col-1" data-label="Username">${appointment.consultantName}</div>
+				            <div class="col col-2" data-label="Email">${appointment.consultantMobile}</div>
+				            <div class="col col-3" data-label="Phone">${appointment.appointmentDate}</div>
+				            <div class="col col-4" data-label="Phone">${appointment.appointmentTime}</div>
+				            <div class="col col-5" data-label="Phone"><button>Cancel</button></div>
+				       </li>
+				     </c:forEach>
+				  </ul>
+				</div> 
+			 </div>
+		</div>  
+	</div>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

@@ -67,7 +67,7 @@
   <section class="home-section">
       
       <!--  Left side of the dashboard -->
-      	<h2><div class="text">Services</div></h2>
+      	<h2><div class="text">Appointment Details</div></h2>
       <div class="column-1">
     
     	

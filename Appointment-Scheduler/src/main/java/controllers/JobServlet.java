@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import dao.UserDaoImpl;
+import models.Appointments;
 import models.Consultant;
 import services.RegistrationServiceImpl;
 import services.RegistrationServices;
@@ -28,8 +30,7 @@ public class JobServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String pathInfo = request.getPathInfo();
 		 UserDao userDao = new UserDaoImpl();
-	     RegistrationServices service = new RegistrationServiceImpl(userDao);
-		 
+		 RegistrationServices service = new RegistrationServiceImpl(userDao);
 	        if (pathInfo == null) {
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/jobhome.jsp").forward(request, response);
 	        } else if ("/consultants".equals(pathInfo)) {
@@ -37,9 +38,7 @@ public class JobServlet extends HttpServlet {
             	System.out.println("consultants : "+consultants);
             	request.setAttribute("consultants", consultants);
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/consultants.jsp").forward(request, response);
-	        } else if ("/appointments".equals(pathInfo)) {
-	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/appointments.jsp").forward(request, response);
-	        }else if ("/profile".equals(pathInfo)) {
+	        } else if ("/profile".equals(pathInfo)) {
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/profile.jsp").forward(request, response);
 	        }
 	        else if ("/services".equals(pathInfo)) {

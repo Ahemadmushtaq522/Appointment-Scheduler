@@ -1,15 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
     <title>The Job</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-02.css?version=1">
     <!-- Boxicons CDN Link -->
-    
-    <link href="${pageContext.request.contextPath}/css/style-02.css?version=1" rel="stylesheet" >
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
    </head>
 <body>
   <div class="sidebar">
@@ -74,35 +73,15 @@
     </ul>
   </div>
   <section class="home-section">
-   <h2><div class="text">Clients</div></h2>
-	<!-- Details priting -->
-  <div class="column-3">
-			<div class="right-column">
-			  <div class="container">
-			    <div class="table-container">
-  <!-- <h2 class="header">Job Seekers' Details</h2>  -->
-				  <br>
-				  <ul class="responsive-table">
-				    <li class="table-header">
-				      <div class="col col-1">Client Id</div>
-				      <div class="col col-2">Email</div>
-				      <div class="col col-3">Mobile</div>
-				      <div class="col col-4">Delete</div>
-				    </li>
-				    
-				    <c:forEach items="${jobSeekers}" var="jobSeeker">
-				       <li class="table-row">
-				            <div class="col col-1" data-label="Username">${jobSeeker.username}</div>
-				            <div class="col col-2" data-label="Email">${jobSeeker.email}</div>
-				            <div class="col col-3" data-label="Phone">${jobSeeker.mobile}</div>
-				            <div class="col col-4" data-label="More"><button class="delete-button">Delete</button></div>
-				       </li>
-				     </c:forEach>
-				  </ul>
-				</div> 
-			 </div>
-		</div>  
-	</div>
+       <form action="<%= request.getContextPath() %>/register" method="POST">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="text" name="email" placeholder="E-mail" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <input type="password" name="password2" placeholder="Retype password" required />
+    <input type="text" name="mobile" placeholder="Mobile Number" required />
+    <input type="submit" name="signup_submit" value="Sign up" />
+  
+</form>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

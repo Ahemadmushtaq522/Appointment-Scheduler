@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-02.css?version=1">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
@@ -61,7 +62,7 @@
              <div class="job">Web designer</div>
            </div>
          </div>
-         <a href="<%= request.getContextPath() %>/login"><i class='bx bx-log-out' id="log_out" ></i></a>
+         <a href="<%= request.getContextPath() %>"><i class='bx bx-log-out' id="log_out" ></i></a>
      </li>
     </ul>
   </div>
@@ -78,20 +79,42 @@
   <br>
   <ul class="responsive-table">
     <li class="table-header">
-      <div class="col col-1">Consultant Id</div>
+      <div class="col col-1" >Consultant</div>
       <div class="col col-2">Email</div>
       <div class="col col-3">Mobile</div>
-      <div class="col col-4">Delete</div>
+      <div class="col col-4">Date</div>
+      <div class="col col-5">Time</div>
+      <div class="col col-6">Actions</div>
     </li>
     
+    
     <c:forEach items="${consultants}" var="consultant">
+    <form method="post" action="<%= request.getContextPath() %>/jobseeker/appointments" >
        <li class="table-row">
-            <div class="col col-1" data-label="Username">${consultant.username}</div>
-            <div class="col col-2" data-label="Email">${consultant.email}</div>
-            <div class="col col-3" data-label="Mobile">${consultant.mobile}</div>
-            <div class="col col-4" data-label="More"><button>Book</button></div>
+            <div class="col col-1" data-label="Username" >${consultant.username}</div>
+            <div class="col col-2" data-label="Email" >${consultant.email}</div>
+            <div class="col col-3" data-label="Mobile" >${consultant.mobile}</div>
+            <div class="col col-4" data-label="Date" ><input type="date" name="appointmentDate"></div>
+            <div class="col col-5" data-label="Time">
+            <select name="appointmentTime">
+                <option >Select</option>
+            	<option value="9.30">9.30</option>
+            	<option value="10.30">10.30</option>
+            	<option value="11.30">11.30</option>
+            	<option value="12.30">12.30</option>
+            	<option value="2.30">2.30</option>
+            	<option value="3.30">3.30</option>
+            	<option value="4.30">4.30</option>
+            </select>
+            </div>
+             <input type="hidden" name="consultantUsername" value="${consultant.username}">
+   			 <input type="hidden" name="consultantEmail" value="${consultant.email}">
+   			 <input type="hidden" name="consultantMobile" value="${consultant.mobile}">
+            <div class="col col-6" data-label="More"><button class="book-button" type="submit">Book</button></div>
        </li>
+        </form>
      </c:forEach>
+    
   </ul>
 </div> 
 			  </div>
@@ -120,6 +143,8 @@
      closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
    }
   }
+  
+
   </script>
 </body>
 </html>

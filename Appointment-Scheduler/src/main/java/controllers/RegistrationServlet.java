@@ -41,34 +41,54 @@ public class RegistrationServlet extends HttpServlet {
         String mobile = request.getParameter("mobile");
 
         
-        //-----------validate password and emai---------------------------//
+      //-----------validate User--------------------------//
+
+        UserDao userDao = new UserDaoImpl();
+        RegistrationServices service = new RegistrationServiceImpl(userDao);
+        boolean userExists = service.isUserExistsByEmail(email);
+        HttpSession session = request.getSession();
+        String userType = (String) session.getAttribute("userType");
+
+        if (userExists) {
+            request.setAttribute("errorMessage", "User with this email already exists.");
+            session.setAttribute("visistedWelcomePage", true);
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            return;
+        }
+
+        // If the user does not exist, proceed with password validation and user creation
+        if (!password.equals(password2)) {
+            request.setAttribute("errorMessage", "Passwords do not match.");
+            session.setAttribute("visistedWelcomePage", true);
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            return;
+        }
         
         
         
         //------------------Entering data----------------------//
-        UserDao userDao = new UserDaoImpl();
-        RegistrationServices userService = new RegistrationServiceImpl(userDao);
-        HttpSession session = request.getSession();
-        String userType = (String) session.getAttribute("userType");
+        
         
         if(userType.equals("Job Hunter")) {
         	User user = new User(username, email,password,mobile);
-        	System.out.println(userService.registerUser(user));
+        	System.out.println(service.registerUser(user));
         	session.setAttribute("visistedWelcomePage", true);
         	response.sendRedirect(request.getContextPath() + "/login");
         }else if(userType.equals("Consultant")) {
         	Consultant consultant = new Consultant(username, email,password,mobile);
-        	System.out.println(userService.registerConsultant(consultant));
+        	System.out.println(service.registerConsultant(consultant));
         	session.setAttribute("visistedWelcomePage", true);
         	response.sendRedirect(request.getContextPath() + "/login");
         }else if(userType.equals("Administrator")) {
         	Admin admin = new Admin(username, email,password,mobile);
-        	System.out.println(userService.registerAdmin(admin));
+        	System.out.println(service.registerAdmin(admin));
         	session.setAttribute("visistedWelcomePage", true);
         	response.sendRedirect(request.getContextPath() + "/login");
         }else {
+        	Consultant consultant = new Consultant(username, email,password,mobile);
+        	System.out.println(service.registerConsultant(consultant));
         	session.setAttribute("visistedWelcomePage", true);
-        	 response.sendRedirect(request.getContextPath() + "/login");
+        	response.sendRedirect(request.getContextPath() + "/login");
         }
  
     }

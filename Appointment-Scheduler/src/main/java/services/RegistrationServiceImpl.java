@@ -5,6 +5,7 @@ import java.util.List;
 import controllers.AdminServlet;
 import dao.UserDao;
 import models.Admin;
+import models.Appointments;
 import models.Consultant;
 import models.User;
 
@@ -54,5 +55,31 @@ public class RegistrationServiceImpl implements RegistrationServices {
 	@Override
 	public List<Consultant> getAllConsultants() {
 		return userDao.getAllConsultants();
+	}
+
+	@Override
+	public String getUserMobileByUsername(String username) {
+		return userDao.getUserMobileByUsername(username);
+	}
+
+	@Override
+	public String makeAppointment(Appointments appointment) {
+		return userDao.makeAppointment(appointment);
+		
+	}
+
+	@Override
+	public List<Appointments> getAllAppointments() {
+		return userDao.getAllAppointments();
+	}
+
+	@Override
+	public String deleteByConsultantEmail(String email) {
+		return userDao.deleteByConsultantEmail(email);
+	}
+
+	@Override
+	public boolean isUserExistsByEmail(String email) {
+		return userDao.isUserExistsByEmail(email);
 	}
 }

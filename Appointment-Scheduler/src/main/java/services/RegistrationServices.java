@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import models.Admin;
+import models.Appointments;
 import models.Consultant;
 import models.User;
 
@@ -15,5 +16,10 @@ public interface RegistrationServices {
 	Admin getAdminByEmailAndPassword(String email, String password);
 	List<User> getAllJobSeekers();
 	List<Consultant> getAllConsultants();
+	String getUserMobileByUsername(String username);
+	String makeAppointment(Appointments appointment);
+	List<Appointments> getAllAppointments();
+	String deleteByConsultantEmail(String email);
+	boolean isUserExistsByEmail(String email);
 	
 }

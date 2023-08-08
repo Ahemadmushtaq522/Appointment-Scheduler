@@ -75,7 +75,10 @@
   </div>
   <section class="home-section">
       
-      	<h2><div class="text">Consultants</div></h2>
+      	<h2>
+      	<div class="text">Consultants</div>
+      	<button class="add-button"><a href="<%= request.getContextPath() %>/admin/addnew">+ New</a></button>
+      	</h2>
       
 	<!-- Consultant Details -->
   <div class="column-3">
@@ -93,13 +96,20 @@
     </li>
     
     <c:forEach items="${consultants}" var="consultant">
-       <li class="table-row">
-            <div class="col col-1" data-label="Username">${consultant.username}</div>
-            <div class="col col-2" data-label="Email">${consultant.email}</div>
-            <div class="col col-3" data-label="Mobile">${consultant.mobile}</div>
-            <div class="col col-4" data-label="Mobile"><button>Delete</button></div>
-       </li>
-     </c:forEach>
+  <li class="table-row">
+    <div class="col col-1" data-label="Username">${consultant.username}</div>
+    <div class="col col-2" data-label="Email">${consultant.email}</div>
+    <div class="col col-3" data-label="Mobile">${consultant.mobile}</div>
+    <div class="col col-4" data-label="Mobile">
+      <form method="post" action="<%= request.getContextPath()%>/admin/delete">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="consultantemail" value="${consultant.email}">
+        <button type="submit" class="delete-button">Delete</button>
+      </form>
+    </div>
+  </li>
+</c:forEach>
+
   </ul>
 </div> 
 			  </div>
