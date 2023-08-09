@@ -45,13 +45,7 @@
        </a>
        <span class="tooltip">Appointments</span>
      </li>
-     <li>
-       <a href="<%= request.getContextPath() %>/consultant/profile">
-         <i class='bx bxs-report'></i>
-         <span class="links_name">Profile</span>
-       </a>
-       <span class="tooltip">Profile</span>
-     </li>
+     
      
      <li class="profile">
          <div class="profile-details">

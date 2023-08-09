@@ -32,7 +32,13 @@ public class ConsultantServlet extends HttpServlet {
 		 String pathInfo = request.getPathInfo();
 		 UserDao userDao = new UserDaoImpl();
 	     RegistrationServices service = new RegistrationServiceImpl(userDao);
-		 
+	     int totalAppointments = service.getTotalAppointments();
+	        int totalClients = service.getTotalClients();
+	        int totalConsultants = service.getTotalConsultants();
+	        
+	        System.out.println("totalAppointments : "+totalAppointments);
+	        System.out.println("totalClients : "+totalClients);
+	        System.out.println("totalConsultants : "+totalConsultants);
 		 
 	        if (pathInfo == null) {
 	            request.getRequestDispatcher("/WEB-INF/views/consultant/consultantHome.jsp").forward(request, response);
@@ -45,8 +51,6 @@ public class ConsultantServlet extends HttpServlet {
                 List<Appointments> appointments = service.getAllAppointments();
                 request.setAttribute("appointments", appointments);
                 request.getRequestDispatcher("/WEB-INF/views/consultant/appointments.jsp").forward(request, response);
-	        }else if ("/profile".equals(pathInfo)) {
-	            request.getRequestDispatcher("/WEB-INF/views/consultant/profile.jsp").forward(request, response);
 	        }else {
 	            response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	        }

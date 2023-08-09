@@ -23,5 +23,9 @@ public interface UserDao {
 	boolean isUserExistsByEmail(String email);
 	String deleteByUserEmail(String uemail);
 	String getUserEmaileByUsername(String username);
+	int getTotalAppointments();
+	int getTotalClients();
+	int getTotalConsultants();
+	List<Appointments> getAppointmentDataForMonth(String selectedMonth);
 	
 }

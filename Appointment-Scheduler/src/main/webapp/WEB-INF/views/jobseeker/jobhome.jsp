@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -60,40 +61,48 @@
   </div>
   <section class="home-section">
       
-      <!--  Left side of the dashboard -->
       	<h2><div class="text">Dashboard</div></h2>
       <div class="column-1">
     
     	
     	<!-- consultant cards -->
     	<div class="cards-container">
-    		<div class="card">
+    		<div class="card-1">
 			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
+			    <h4 style="text-align:center;color:white;"><b>Total Appointments</b></h4> 
+			    <p style="font-size:30px;text-align:center;color:white;"><%= request.getAttribute("totalAppointments") %></p> 
 			  </div>
 			</div>
-			<br>
-			<div class="card">
+			
+    	</div>
+	 </div>
+	  <div class="column-1">
+    
+    	
+    	<!-- consultant cards -->
+    	<div class="cards-container">
+			<div class="card-2">
 			  <div class="container">
-			    <h4><b>Jakson Peter</b></h4> 
-			    <p>Computer Engineering</p> 
+			    <h4 style="text-align:center;color:white;"><b>Total Clients</b></h4> 
+			    <p style="font-size:30px;text-align:center;color:white;"><%= request.getAttribute("totalClients") %></p> 
 			  </div>
 			</div>
     	</div>
+	 </div>
+	  <div class="column-1">
+    
     	
-    	
-			
+    	<!-- consultant cards -->
+    	<div class="cards-container">
+			<div class="card-3">
+			  <div class="container">
+			    <h4 style="text-align:center;color:white;"><b>Total Consultants</b></h4> 
+			    <p style="font-size:30px;text-align:center;color:white;"><%= request.getAttribute("totalConsultants") %></p> 
+			  </div>
+			</div>
+    	</div>
 	 </div>
 
-	<!-- Right side of the dashboard -->
-  <div class="column-2">
-			<div class="right-column">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>  </div>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

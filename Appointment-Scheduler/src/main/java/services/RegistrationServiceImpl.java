@@ -92,4 +92,24 @@ public class RegistrationServiceImpl implements RegistrationServices {
 	public String getUserEmaileByUsername(String username) {
 		return userDao.getUserEmaileByUsername(username);
 	}
+
+	@Override
+	public int getTotalAppointments() {
+		return userDao.getTotalAppointments();
+	}
+
+	@Override
+	public int getTotalClients() {
+		return userDao.getTotalClients();
+	}
+
+	@Override
+	public int getTotalConsultants() {
+		return userDao.getTotalConsultants();
+	}
+
+	@Override
+	public List<Appointments> getAppointmentDataForMonth(String selectedMonth) {
+		return userDao.getAppointmentDataForMonth(selectedMonth);
+	}
 }

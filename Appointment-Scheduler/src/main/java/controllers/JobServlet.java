@@ -31,6 +31,14 @@ public class JobServlet extends HttpServlet {
 		 String pathInfo = request.getPathInfo();
 		 UserDao userDao = new UserDaoImpl();
 		 RegistrationServices service = new RegistrationServiceImpl(userDao);
+		 int totalAppointments = service.getTotalAppointments();
+	        int totalClients = service.getTotalClients();
+	        int totalConsultants = service.getTotalConsultants();
+
+	        request.setAttribute("totalAppointments", totalAppointments);
+	        request.setAttribute("totalClients", totalClients);
+	        request.setAttribute("totalConsultants", totalConsultants);
+
 	        if (pathInfo == null) {
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/jobhome.jsp").forward(request, response);
 	        } else if ("/consultants".equals(pathInfo)) {

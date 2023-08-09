@@ -6,10 +6,33 @@
     <meta charset="UTF-8">
     <title>The Job</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-02.css?version=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXlrzF1/+3v/HaBwiW+kWimz1lOMl3Z83O+OrCXaRkf" crossorigin="anonymous">
+    
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+     .input{
+     padding:5px 15px;
+     border: 2px solid green;
+     }
+     .search-button{
+     padding:5px 5px;
+     border:none;
+     background-color: green;
+     color:white;
+     border-radius:5px;
+     }
+     .search-button:hover{
+     padding:5px 5px;
+     border:2px solid green;
+     background-color: white;
+     color:green;
+     border-radius:5px;
+     cursor: pointer;
+     }
+     </style>
    </head>
 <body>
   <div class="sidebar">
@@ -62,8 +85,9 @@
   </div>
   <section class="home-section">
     
-      	<h2><div class="text">Consultants</div></h2>
-      
+      	<h2><div class="text">Consultants</div><input type="text" id="searchInput" class="input"  placeholder="Search by country...">
+        <button type="button" id="searchButton" class="search-button">search</button></h2>
+
 	<!-- Consultant Details -->
   <div class="column-3">
 			<div class="right-column">

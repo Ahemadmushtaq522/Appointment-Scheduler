@@ -1,11 +1,16 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import models.Admin;
@@ -555,8 +560,140 @@ public class UserDaoImpl implements UserDao {
 		    System.out.println(uemail);
 		    return uemail;
 		}
+
+	@Override
+	public int getTotalAppointments() {
+		 loadDriver(dbDriver);
+		    Connection con = getConnection();
+		    int totalAppointments = 0;
+
+		    String sql = "SELECT COUNT(*) AS total FROM appointments";
+		    PreparedStatement ps;
+		    ResultSet rs;
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        rs = ps.executeQuery();
+
+		        if (rs.next()) {
+		            totalAppointments = rs.getInt("total");
+		        }
+
+		        ps.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return totalAppointments;
+	}
+
+	@Override
+	public int getTotalClients() {
+		loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    int totalClients = 0;
+
+	    String sql = "SELECT COUNT(*) AS total FROM users";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            totalClients = rs.getInt("total");
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return totalClients;
+	}
+
+	@Override
+	public int getTotalConsultants() {
+		loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    int totalConsultants = 0;
+
+	    String sql = "SELECT COUNT(*) AS total FROM consultants";
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	        	totalConsultants = rs.getInt("total");
+	        }
+
+	        ps.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return totalConsultants;
+	}
+
+	@Override
+	public List<Appointments> getAppointmentDataForMonth(String selectedMonth) {
+	    loadDriver(dbDriver);
+	    Connection con = getConnection();
+	    List<Appointments> appointments = new ArrayList<>();
+
+	    String sql = "SELECT * FROM appointments "; 
+	    PreparedStatement ps;
+	    ResultSet rs;
+
+	    try {
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            String username = rs.getString("uname");
+	            String usermobile = rs.getString("umobile");
+	            String consultantname = rs.getString("cname");
+	            String consultantmobile = rs.getString("cmobile");
+	            String adate = rs.getString("adate");
+	            String atime = rs.getString("atime");
+	            
+	            // Convert the stored date string to a java.sql.Date object
+	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            java.util.Date appointmentDate = dateFormat.parse(adate);
+
+	            // Compare the month of the appointmentDate with the selected month
+	            Calendar calendar = Calendar.getInstance();
+	            calendar.setTime(appointmentDate);
+	            int month = calendar.get(Calendar.MONTH) + 1; // Months are 0-based in Calendar
+	            String appointmentMonth = new DateFormatSymbols().getMonths()[month - 1]; // Get month name
+
+	            if (selectedMonth.equalsIgnoreCase(appointmentMonth)) {
+	                Appointments appointment = new Appointments(username, usermobile, consultantname, consultantmobile, adate, atime);
+	                appointments.add(appointment);
+	            }
+	        }
+
+	        rs.close();
+	        ps.close();
+	    } catch (SQLException | ParseException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return appointments;
+	}
+
+	}
+
 	
 
 
-	
-}

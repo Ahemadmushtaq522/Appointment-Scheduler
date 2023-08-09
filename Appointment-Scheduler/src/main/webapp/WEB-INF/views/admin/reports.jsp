@@ -73,40 +73,39 @@
   </div>
   <section class="home-section">
       
-      <!--  Left side of the dashboard -->
-      	<h2><div class="text">Reports</div></h2>
-      <div class="column-1">
-    
-    	
-    	<!-- consultant cards -->
-    	<div class="cards-container">
-    		<div class="card">
+      <div class="column-3">
+			<div class="right-column">
 			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
+			    <div class="table-container">
+			    <form action="<%= request.getContextPath() %>/admin/generate-report" method="POST">
+    					<input type="hidden" name="action" value="generate-report">
+					    <label for="monthSelect">Select Month:</label>
+					    <select id="monthSelect" name="selectedMonth">
+						    <option value="January">January</option>
+						    <option value="February">February</option>
+						    <option value="March">March</option>
+						    <option value="April">April</option>
+						    <option value="May">May</option>
+						    <option value="June">June</option>
+						    <option value="July">July</option>
+						    <option value="August">August</option>
+						    <option value="September">September</option>
+						    <option value="October">October</option>
+						    <option value="November">November</option>
+						    <option value="December">December</option>
+						</select>
+
+					    <input type="submit" value="Generate Report" class=add-button>
+				</form>
+
+			    
+			    </div>
 			  </div>
 			</div>
-			<br>
-			<div class="card">
-			  <div class="container">
-			    <h4><b>Jakson Peter</b></h4> 
-			    <p>Computer Engineering</p> 
-			  </div>
-			</div>
-    	</div>
-    	
-    	
+		</div>
 			
 	 </div>
 
-	<!-- Right side of the dashboard -->
-  <div class="column-2">
-			<div class="right-column">
-			  <div class="container">
-			    <h4><b>John Doe</b></h4> 
-			    <p>Architect & Engineer</p> 
-			  </div>
-			</div>  </div>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

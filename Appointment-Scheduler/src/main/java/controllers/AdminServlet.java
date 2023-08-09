@@ -36,11 +36,14 @@ public class AdminServlet extends HttpServlet {
         String password = request.getParameter("password");
         String mobile = request.getParameter("mobile");
     	
+        int totalAppointments = service.getTotalAppointments();
+        int totalClients = service.getTotalClients();
+        int totalConsultants = service.getTotalConsultants();
+
+        request.setAttribute("totalAppointments", totalAppointments);
+        request.setAttribute("totalClients", totalClients);
+        request.setAttribute("totalConsultants", totalConsultants);
         
-        System.out.println(username);
-        System.out.println(email);
-        System.out.println(password);
-        System.out.println(mobile);
         if (loggedIn) {
             String pathInfo = request.getPathInfo();
             
