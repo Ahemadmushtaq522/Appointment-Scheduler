@@ -46,13 +46,7 @@
        </a>
        <span class="tooltip">Appointments</span>
      </li>
-     <li>
-       <a href="<%= request.getContextPath() %>/jobseeker/profile">
-         <i class='bx bxs-report'></i>
-         <span class="links_name">Profile</span>
-       </a>
-       <span class="tooltip">Profile</span>
-     </li>
+     
      
      <li class="profile">
          <div class="profile-details">
@@ -80,7 +74,7 @@
   <ul class="responsive-table">
     <li class="table-header">
       <div class="col col-1" >Consultant</div>
-      <div class="col col-2">Email</div>
+      <div class="col col-2">Country</div>
       <div class="col col-3">Mobile</div>
       <div class="col col-4">Date</div>
       <div class="col col-5">Time</div>
@@ -92,7 +86,7 @@
     <form method="post" action="<%= request.getContextPath() %>/jobseeker/appointments" >
        <li class="table-row">
             <div class="col col-1" data-label="Username" >${consultant.username}</div>
-            <div class="col col-2" data-label="Email" >${consultant.email}</div>
+            <div class="col col-2" data-label="Email" >${consultant.country}</div>
             <div class="col col-3" data-label="Mobile" >${consultant.mobile}</div>
             <div class="col col-4" data-label="Date" ><input type="date" name="appointmentDate"></div>
             <div class="col col-5" data-label="Time">

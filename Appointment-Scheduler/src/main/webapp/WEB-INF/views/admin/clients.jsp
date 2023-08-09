@@ -95,7 +95,13 @@
 				            <div class="col col-1" data-label="Username">${jobSeeker.username}</div>
 				            <div class="col col-2" data-label="Email">${jobSeeker.email}</div>
 				            <div class="col col-3" data-label="Phone">${jobSeeker.mobile}</div>
-				            <div class="col col-4" data-label="More"><button class="delete-button">Delete</button></div>
+				            <div class="col col-4" data-label="More">
+				            <form method="post" action="<%= request.getContextPath()%>/admin/client/delete">
+						        <input type="hidden" name="action" value="delete">
+						        <input type="hidden" name="jobseekeremail" value="${jobSeeker.email}">
+						        <button type="submit" class="delete-button">Delete</button>
+						    </form>
+						    </div>
 				       </li>
 				     </c:forEach>
 				  </ul>

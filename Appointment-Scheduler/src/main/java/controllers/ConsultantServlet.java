@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import dao.UserDaoImpl;
+import models.Appointments;
+import models.Consultant;
 import models.User;
 import services.RegistrationServiceImpl;
 import services.RegistrationServices;
@@ -39,7 +42,9 @@ public class ConsultantServlet extends HttpServlet {
             	request.setAttribute("jobSeekers", jobSeekers);
 	            request.getRequestDispatcher("/WEB-INF/views/consultant/clients.jsp").forward(request, response);
 	        } else if ("/appointments".equals(pathInfo)) {
-	            request.getRequestDispatcher("/WEB-INF/views/consultant/appointments.jsp").forward(request, response);
+                List<Appointments> appointments = service.getAllAppointments();
+                request.setAttribute("appointments", appointments);
+                request.getRequestDispatcher("/WEB-INF/views/consultant/appointments.jsp").forward(request, response);
 	        }else if ("/profile".equals(pathInfo)) {
 	            request.getRequestDispatcher("/WEB-INF/views/consultant/profile.jsp").forward(request, response);
 	        }else {
@@ -47,9 +52,45 @@ public class ConsultantServlet extends HttpServlet {
 	        }
 	}
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//		doGet(request, response);
-//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    String pathInfo = request.getPathInfo();
+	    UserDao userDao = new UserDaoImpl();
+	    RegistrationServices service = new RegistrationServiceImpl(userDao);
+
+	    if ("/register".equals(pathInfo)) {
+	        String username = request.getParameter("username");
+	        String email = request.getParameter("email");
+	        String country = request.getParameter("country");
+	        String password = request.getParameter("password");
+	        String password2 = request.getParameter("password2");
+	        String mobile = request.getParameter("mobile");
+	        boolean userExists = service.isUserExistsByEmail(email);
+	        
+	        System.out.println("COnsultant email : "+email);
+	        if (userExists) {
+	            request.setAttribute("errorMessage", "User with this email already exists.");
+	            request.getRequestDispatcher("/WEB-INF/views/admin/addnew.jsp").forward(request, response);
+	            return;
+	        }
+	        else {
+	        	// If the user does not exist, proceed with password validation and user creation
+		        if (!password.equals(password2)) {
+		            request.setAttribute("errorMessage", "Passwords do not match.");
+		            request.getRequestDispatcher("/WEB-INF/views/admin/addnew.jsp").forward(request, response);
+		            return;
+		        }
+	        	Consultant consultant = new Consultant(username, password, email, mobile, country);
+		        String success = service.registerConsultant(consultant);
+		        response.sendRedirect(request.getContextPath() + "/admin/consultants");
+	        }
+	        
+	   
+	        
+	      
+	    } else {
+	        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+	    }
+	}
+
 
 }

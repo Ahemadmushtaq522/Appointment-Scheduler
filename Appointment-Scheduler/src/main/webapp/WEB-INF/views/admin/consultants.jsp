@@ -77,7 +77,11 @@
       
       	<h2>
       	<div class="text">Consultants</div>
-      	<button class="add-button"><a href="<%= request.getContextPath() %>/admin/addnew">+ New</a></button>
+      	<button class="add-button">
+	      	<a href="<%= request.getContextPath() %>/admin/addnew" style="text-decoration: none; color: inherit;">
+	      		+ New
+	      	</a>
+	    </button>
       	</h2>
       
 	<!-- Consultant Details -->
@@ -92,7 +96,8 @@
       <div class="col col-1">Consultant Id</div>
       <div class="col col-2">Email</div>
       <div class="col col-3">Mobile</div>
-      <div class="col col-4">Delete</div>
+      <div class="col col-4">Country</div>
+      <div class="col col-5">Delete</div>
     </li>
     
     <c:forEach items="${consultants}" var="consultant">
@@ -100,8 +105,9 @@
     <div class="col col-1" data-label="Username">${consultant.username}</div>
     <div class="col col-2" data-label="Email">${consultant.email}</div>
     <div class="col col-3" data-label="Mobile">${consultant.mobile}</div>
-    <div class="col col-4" data-label="Mobile">
-      <form method="post" action="<%= request.getContextPath()%>/admin/delete">
+    <div class="col col-4" data-label="Country">${consultant.country}</div>
+    <div class="col col-5" data-label="More">
+      <form method="post" action="<%= request.getContextPath()%>/admin/consultant/delete">
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="consultantemail" value="${consultant.email}">
         <button type="submit" class="delete-button">Delete</button>

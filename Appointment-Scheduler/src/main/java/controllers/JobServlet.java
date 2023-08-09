@@ -38,9 +38,7 @@ public class JobServlet extends HttpServlet {
             	System.out.println("consultants : "+consultants);
             	request.setAttribute("consultants", consultants);
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/consultants.jsp").forward(request, response);
-	        } else if ("/profile".equals(pathInfo)) {
-	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/profile.jsp").forward(request, response);
-	        }
+	        } 
 	        else if ("/services".equals(pathInfo)) {
 	            request.getRequestDispatcher("/WEB-INF/views/jobseeker/services.jsp").forward(request, response);
 	        }else {

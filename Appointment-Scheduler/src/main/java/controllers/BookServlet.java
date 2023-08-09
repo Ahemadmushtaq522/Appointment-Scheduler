@@ -15,6 +15,7 @@ import dao.UserDaoImpl;
 import models.Appointments;
 import services.RegistrationServiceImpl;
 import services.RegistrationServices;
+import util.EmailUtility;
 
 @WebServlet("/jobseeker/appointments")
 public class BookServlet extends HttpServlet {
@@ -52,12 +53,18 @@ public class BookServlet extends HttpServlet {
 		    UserDao userDao = new UserDaoImpl();
 	        RegistrationServices userService = new RegistrationServiceImpl(userDao);
 	        String usermobile = userService.getUserMobileByUsername(username);
+	        String uemail = userService.getUserEmaileByUsername(username);
 	        
 	        Appointments appointment = new Appointments(username,usermobile,consultantUsername,consultantMobile,appointmentDate,appointmentTime);
 	        System.out.println(userService.makeAppointment(appointment));
 	   
 	        List<Appointments> appointments = userService.getAllAppointments();
         	System.out.println("appointments : "+appointments);
+        	
+        	//sending and email to both consultant and client
+//        	EmailUtility.sendAppointmentConfirmation(consultantEmail, uemail);
+        	
+        	
         	request.setAttribute("appointments", appointments);
 		    request.getRequestDispatcher("/WEB-INF/views/jobseeker/appointments.jsp").forward(request, response);
 	}

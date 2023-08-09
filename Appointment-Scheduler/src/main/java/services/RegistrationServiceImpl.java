@@ -82,4 +82,14 @@ public class RegistrationServiceImpl implements RegistrationServices {
 	public boolean isUserExistsByEmail(String email) {
 		return userDao.isUserExistsByEmail(email);
 	}
+
+	@Override
+	public String deleteByUserEmail(String uemail) {
+		return userDao.deleteByUserEmail(uemail);
+	}
+
+	@Override
+	public String getUserEmaileByUsername(String username) {
+		return userDao.getUserEmaileByUsername(username);
+	}
 }

@@ -21,5 +21,7 @@ public interface UserDao {
 	List<Appointments> getAllAppointments();
 	String deleteByConsultantEmail(String email);
 	boolean isUserExistsByEmail(String email);
+	String deleteByUserEmail(String uemail);
+	String getUserEmaileByUsername(String username);
 	
 }

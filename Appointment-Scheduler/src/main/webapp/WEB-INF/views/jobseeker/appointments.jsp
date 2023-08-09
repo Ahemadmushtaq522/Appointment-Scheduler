@@ -45,13 +45,7 @@
        </a>
        <span class="tooltip">Appointments</span>
      </li>
-     <li>
-       <a href="<%= request.getContextPath() %>/jobseeker/profile">
-         <i class='bx bxs-report'></i>
-         <span class="links_name">Profile</span>
-       </a>
-       <span class="tooltip">Profile</span>
-     </li>
+     
      
      <li class="profile">
          <div class="profile-details">
@@ -81,7 +75,6 @@
 				      <div class="col col-2">Mobile</div>
 				      <div class="col col-3">Appointment Date</div>
 				      <div class="col col-4">Appointment Time</div>
-				      <div class="col col-5">Action</div>
 				    </li>
 				    
 				    <c:forEach items="${appointments}" var="appointment">
@@ -90,7 +83,6 @@
 				            <div class="col col-2" data-label="Email">${appointment.consultantMobile}</div>
 				            <div class="col col-3" data-label="Phone">${appointment.appointmentDate}</div>
 				            <div class="col col-4" data-label="Phone">${appointment.appointmentTime}</div>
-				            <div class="col col-5" data-label="Phone"><button>Cancel</button></div>
 				       </li>
 				     </c:forEach>
 				  </ul>

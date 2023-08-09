@@ -74,22 +74,9 @@ public class RegistrationServlet extends HttpServlet {
         	System.out.println(service.registerUser(user));
         	session.setAttribute("visistedWelcomePage", true);
         	response.sendRedirect(request.getContextPath() + "/login");
-        }else if(userType.equals("Consultant")) {
-        	Consultant consultant = new Consultant(username, email,password,mobile);
-        	System.out.println(service.registerConsultant(consultant));
-        	session.setAttribute("visistedWelcomePage", true);
-        	response.sendRedirect(request.getContextPath() + "/login");
-        }else if(userType.equals("Administrator")) {
-        	Admin admin = new Admin(username, email,password,mobile);
-        	System.out.println(service.registerAdmin(admin));
-        	session.setAttribute("visistedWelcomePage", true);
-        	response.sendRedirect(request.getContextPath() + "/login");
         }else {
-        	Consultant consultant = new Consultant(username, email,password,mobile);
-        	System.out.println(service.registerConsultant(consultant));
-        	session.setAttribute("visistedWelcomePage", true);
-        	response.sendRedirect(request.getContextPath() + "/login");
-        }
+	        response.sendError(HttpServletResponse.SC_NOT_FOUND);
+	    }
  
     }
 

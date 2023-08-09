@@ -77,12 +77,16 @@ public class AdminServlet extends HttpServlet {
         UserDao userDao = new UserDaoImpl();
         RegistrationServices service = new RegistrationServiceImpl(userDao);
         
-        if ("/delete".equals(pathInfo)) {
+        if ("/consultant/delete".equals(pathInfo)) {
             String cemail = request.getParameter("consultantemail");
             
             System.out.println(service.deleteByConsultantEmail(cemail));
             response.sendRedirect(request.getContextPath() + "/admin/consultants");
-        }else {
+        }else if("/client/delete".equals(pathInfo)){
+        	String uemail = request.getParameter("jobseekeremail");  
+            System.out.println(service.deleteByUserEmail(uemail));
+            response.sendRedirect(request.getContextPath() + "/admin/clients");
+        }else{
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }

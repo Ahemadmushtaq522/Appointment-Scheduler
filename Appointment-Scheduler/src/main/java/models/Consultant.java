@@ -5,20 +5,18 @@ public class Consultant {
 	private String password;
 	private String email;
 	private String mobile;
+	private String country;
 	
 	
-	public Consultant(String username, String password, String email, String mobile) {
+	public Consultant(String username, String password, String email, String mobile, String country) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.mobile = mobile;
+		this.country = country;
 	}
 	
-	public Consultant() {
-		super();
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -43,7 +41,12 @@ public class Consultant {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	
 	
-
 }

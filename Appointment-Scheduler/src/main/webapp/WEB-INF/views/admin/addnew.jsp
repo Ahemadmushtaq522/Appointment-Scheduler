@@ -9,6 +9,45 @@
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+  form {
+    width: 300px;
+    margin:30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #F0F8FF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  input::placeholder {
+    color: #aaa;
+  }
+</style>
+     
    </head>
 <body>
   <div class="sidebar">
@@ -73,15 +112,26 @@
     </ul>
   </div>
   <section class="home-section">
-       <form action="<%= request.getContextPath() %>/register" method="POST">
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="text" name="email" placeholder="E-mail" required />
-    <input type="password" name="password" placeholder="Password" required />
-    <input type="password" name="password2" placeholder="Retype password" required />
-    <input type="text" name="mobile" placeholder="Mobile Number" required />
-    <input type="submit" name="signup_submit" value="Sign up" />
   
-</form>
+   <div class="column-3">
+			<div class="right-column">
+			  <div class="container">
+			    <div class="table-container">
+			      <p style="color:red;font-size:12;"><%= request.getAttribute("errorMessage") %></p>
+			    <form action="<%= request.getContextPath() %>/consultant/register" method="POST">
+				    <input type="text" name="username" placeholder="Username" required />
+				    <input type="text" name="email" placeholder="E-mail" required />
+				    <input type="text" name="country" placeholder="Country" required />
+				    <input type="password" name="password" placeholder="Password" required />
+				    <input type="password" name="password2" placeholder="Retype password" required />
+				    <input type="text" name="mobile" placeholder="Mobile Number" required />
+				    <input type="submit" name="signup_submit" value="Sign up" />
+				</form>
+			    </div>
+			  </div>
+			</div>
+		</div>
+       
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");

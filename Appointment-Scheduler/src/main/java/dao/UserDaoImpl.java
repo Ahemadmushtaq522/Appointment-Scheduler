@@ -123,7 +123,7 @@ public class UserDaoImpl implements UserDao {
 			System.out.println("not null ");
 		}
 		String result = "Data entered successfully";
-		String sql = "insert into consultants(cname, cemail, cpwd, cmobile) values(?,?,?,?)";
+		String sql = "insert into consultants(cname, cpwd,cemail,  cmobile, country) values(?,?,?,?,?)";
 		
 		PreparedStatement ps;
 		try {
@@ -132,6 +132,7 @@ public class UserDaoImpl implements UserDao {
 			ps.setString(2, consultant.getPassword());
 			ps.setString(3, consultant.getEmail());
 			ps.setString(4, consultant.getMobile());
+			ps.setString(5, consultant.getCountry());
 			
 			int rowsAffected = ps.executeUpdate(); 
 	        
@@ -209,8 +210,9 @@ public class UserDaoImpl implements UserDao {
                 int id = rs.getInt("id");
                 String username = rs.getString("cname");
                 String mobile = rs.getString("cmobile");
+                String country = rs.getString("country");
 
-                Consultant consultant = new Consultant(username, email, password, mobile);
+                Consultant consultant = new Consultant(username, email, password, mobile, country);
                 return consultant;
             }
             
@@ -320,8 +322,9 @@ public class UserDaoImpl implements UserDao {
 	            String email = rs.getString("cemail");
 	            String password = rs.getString("cpwd");
 	            String mobile = rs.getString("cmobile");
+	            String country = rs.getString("country");
 
-	            Consultant consultant = new Consultant(username, password, email, mobile);
+	            Consultant consultant = new Consultant(username, password, email, mobile, country);
 	            System.out.println("consultant "+consultant);
 	            consultants.add(consultant);
 	        }
@@ -472,7 +475,7 @@ public class UserDaoImpl implements UserDao {
 	    Connection con = getConnection();
 	    boolean userExists = false;
 
-	    String sql = "SELECT * FROM users WHERE uemail = ?";
+	    String sql = "SELECT * FROM consultants WHERE cemail = ?";
 	    PreparedStatement ps;
 	    ResultSet rs;
 
@@ -496,8 +499,63 @@ public class UserDaoImpl implements UserDao {
 	        }
 	    }
 
+	    System.out.println("userExists :"+userExists);
 	    return userExists;
 	}
+
+	@Override
+	public String deleteByUserEmail(String uemail) {
+		  loadDriver(dbDriver);
+		    Connection con = getConnection();
+
+		    String sql = "DELETE FROM users WHERE uemail = ?";
+		    PreparedStatement ps;
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        ps.setString(1, uemail);
+		        int rowsAffected = ps.executeUpdate();
+
+		        if (rowsAffected > 0) {
+		            return "Deleted consultant associated with user email: " + uemail;
+		        } else {
+		            return "No consultant found with user email: " + uemail;
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return "Error deleting user associated with user email: " + uemail;
+		    }
+	}
+
+	@Override
+	public String getUserEmaileByUsername(String username) {
+			loadDriver(dbDriver);
+		    Connection con = getConnection();
+		    String uemail = null;
+		    System.out.println(username);
+		    String sql = "SELECT uemail FROM users WHERE uname = ?";
+		    PreparedStatement ps;
+		    ResultSet rs;
+
+		    try {
+		        ps = con.prepareStatement(sql);
+		        ps.setString(1, username);
+		        rs = ps.executeQuery();
+
+		        if (rs.next()) {
+		            uemail = rs.getString("uemail");
+		        }
+
+		        ps.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    System.out.println(uemail);
+		    return uemail;
+		}
+	
 
 
 	
