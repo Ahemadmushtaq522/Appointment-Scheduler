@@ -26,34 +26,15 @@ public class UserDaoImpl implements UserDao {
 	private String dbDriver = "com.mysql.cj.jdbc.Driver";
 	
 
-	public void loadDriver(String dbDriver) {
-		try {
-			Class.forName(dbDriver);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	Connector connect = new Connector(dbUrl,dbUname,dbPassword,dbDriver);
 	
-	public Connection getConnection() {
-		
-		Connection con = null;
-		try {
-			con = DriverManager.getConnection(dbUrl, dbUname, dbPassword);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return con;
-	}
 	
 	@Override
 	public String registerUser(User user) {
 		
-		loadDriver(dbDriver);
+		connect.loadDriver(dbDriver);
 		
-		Connection con = getConnection();
+		Connection con = connect.getConnection();
 		if(con!=null) {
 			System.out.println("not null ");
 		}
@@ -86,9 +67,9 @@ public class UserDaoImpl implements UserDao {
 	}
 	@Override
 	public String registerAdmin(Admin admin) {
-		loadDriver(dbDriver);
+		connect.loadDriver(dbDriver);
 		
-		Connection con = getConnection();
+		Connection con = connect.getConnection();
 		if(con!=null) {
 			System.out.println("not null ");
 		}
@@ -121,9 +102,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String registerConsultant(Consultant consultant) {
-		loadDriver(dbDriver);
+		connect.loadDriver(dbDriver);
 		
-		Connection con = getConnection();
+		Connection con = connect.getConnection();
 		if(con!=null) {
 			System.out.println("not null ");
 		}
@@ -160,8 +141,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) {
 		
-		loadDriver(dbDriver);
-		Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+		Connection con = connect.getConnection();
 		
 		String sql = "SELECT * FROM users WHERE uemail = ? AND upwd = ?";
         PreparedStatement ps;
@@ -198,8 +179,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Consultant getConsultantByEmailAndPassword(String email, String password) {
-		loadDriver(dbDriver);
-		Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+		Connection con = connect.getConnection();
 		
 		String sql = "SELECT * FROM consultants WHERE cemail = ? AND cpwd = ?";
         PreparedStatement ps;
@@ -236,8 +217,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Admin getAdminByEmailAndPassword(String email, String password) {
-		loadDriver(dbDriver);
-		Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+		Connection con = connect.getConnection();
 		
 		String sql = "SELECT * FROM administrator WHERE aemail = ? AND apwd = ?";
         PreparedStatement ps;
@@ -274,8 +255,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getAllJobSeekers() {
 		 System.out.println("in get all job seekers method");
-	    loadDriver(dbDriver);
-	    Connection con = getConnection();
+	    connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    List<User> jobSeekers = new ArrayList<>();
 
 	    String sql = "SELECT * FROM users";
@@ -309,8 +290,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<Consultant> getAllConsultants() {
 		System.out.println("in get all Consultants method");
-	    loadDriver(dbDriver);
-	    Connection con = getConnection();
+	    connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    List<Consultant> consultants = new ArrayList<>();
 
 	    String sql = "SELECT * FROM consultants";
@@ -344,8 +325,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String getUserMobileByUsername(String username) {
-		loadDriver(dbDriver);
-	    Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    String mobile = null;
 	    System.out.println(username);
 	    String sql = "SELECT umobile FROM users WHERE uname = ?";
@@ -372,8 +353,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String makeAppointment(Appointments appointment) {
-		loadDriver(dbDriver);
-		Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+		Connection con = connect.getConnection();
 		String result = "Appointment made successfully";
 		String sql = "insert into appointments(uname, umobile, cname, cmobile, adate, atime) values(?,?,?,?,?,?)";
 		System.out.println("appointment "+appointment.getUsername());
@@ -411,8 +392,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<Appointments> getAllAppointments() {
 		 System.out.println("in get all appointments method");
-		    loadDriver(dbDriver);
-		    Connection con = getConnection();
+		    connect.loadDriver(dbDriver);
+		    Connection con = connect.getConnection();
 		    List<Appointments> appointments = new ArrayList<>();
 
 		    String sql = "SELECT * FROM appointments";
@@ -451,8 +432,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String deleteByConsultantEmail(String email) {
-	    loadDriver(dbDriver);
-	    Connection con = getConnection();
+	    connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 
 	    String sql = "DELETE FROM consultants WHERE cemail = ?";
 	    PreparedStatement ps;
@@ -476,8 +457,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean isUserExistsByEmail(String email) {
-		loadDriver(dbDriver);
-	    Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    boolean userExists = false;
 
 	    String sql = "SELECT * FROM consultants WHERE cemail = ?";
@@ -510,8 +491,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String deleteByUserEmail(String uemail) {
-		  loadDriver(dbDriver);
-		    Connection con = getConnection();
+		  connect.loadDriver(dbDriver);
+		    Connection con = connect.getConnection();
 
 		    String sql = "DELETE FROM users WHERE uemail = ?";
 		    PreparedStatement ps;
@@ -535,8 +516,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public String getUserEmaileByUsername(String username) {
-			loadDriver(dbDriver);
-		    Connection con = getConnection();
+			connect.loadDriver(dbDriver);
+		    Connection con = connect.getConnection();
 		    String uemail = null;
 		    System.out.println(username);
 		    String sql = "SELECT uemail FROM users WHERE uname = ?";
@@ -563,8 +544,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int getTotalAppointments() {
-		 loadDriver(dbDriver);
-		    Connection con = getConnection();
+		 connect.loadDriver(dbDriver);
+		    Connection con = connect.getConnection();
 		    int totalAppointments = 0;
 
 		    String sql = "SELECT COUNT(*) AS total FROM appointments";
@@ -589,8 +570,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int getTotalClients() {
-		loadDriver(dbDriver);
-	    Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    int totalClients = 0;
 
 	    String sql = "SELECT COUNT(*) AS total FROM users";
@@ -615,8 +596,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int getTotalConsultants() {
-		loadDriver(dbDriver);
-	    Connection con = getConnection();
+		connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    int totalConsultants = 0;
 
 	    String sql = "SELECT COUNT(*) AS total FROM consultants";
@@ -641,8 +622,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<Appointments> getAppointmentDataForMonth(String selectedMonth) {
-	    loadDriver(dbDriver);
-	    Connection con = getConnection();
+	    connect.loadDriver(dbDriver);
+	    Connection con = connect.getConnection();
 	    List<Appointments> appointments = new ArrayList<>();
 
 	    String sql = "SELECT * FROM appointments "; 

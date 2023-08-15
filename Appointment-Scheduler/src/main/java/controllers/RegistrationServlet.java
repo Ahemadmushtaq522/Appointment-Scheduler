@@ -64,6 +64,12 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
         
+        if(password.length() <8) {
+        	request.setAttribute("errorMessage", "Invalid password length.");
+            session.setAttribute("visistedWelcomePage", true);
+            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+            return;
+        }
         
         
         //------------------Entering data----------------------//
